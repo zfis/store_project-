@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+
+        <record id="res_partner_form_view_inherit" model="ir.ui.view">
+                    <field name="name">partner_partner_form</field>
+                    <field name="model">res.partner</field>
+                    <field name="inherit_id" ref="base.view_partner_form"/>
+                    <field name="arch" type="xml">
+
+                        <xpath expr="//div[@class='oe_button_box']" position="after">
+
+                                    <group>
+                                        <field name="fname" required="1" placeholder="First Name"/>
+                                        <field name="lname" required="1" placeholder="Last Name"/>
+                                    </group>
+
+
+                        </xpath>
+
+
+                        <xpath expr="//field[@name='name']" position="replace">
+
+                        <field name="name"  placeholder="Name" required="False" readonly="False" force_save="True"/>
+                        </xpath >
+
+
+                        <xpath expr="//field[@name='mobile']" position="replace">
+                        <field name="mobile" widget="mobile" required="1"/>
+                        </xpath >
+
+
+                        <xpath expr="//field[@name='vat']" position="after">
+
+                            <!--<field name="refs" widget="many2many_tags"/>-->
+                            <field name="internal_ref"/>
+                            <field name="additional_notes"/>
+
+
+                        </xpath >
+
+                        <xpath expr="//notebook" position="inside">
+                            <page name="referral" string="Referral">
+                                <group>
+                                    <field name="refs"/>
+                                </group>
+
+                                <group>
+                                    <field name="summation"/>
+                                </group>
+
+                            </page>
+
+                        </xpath>
+
+
+
+                    </field>
+        </record>
+
+
+
+
+        <record id="res_partner_tree_inherit" model="ir.ui.view">
+            <field name="name">partner_partner_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//tree" position="replace">
+
+                <tree string="Contacts" default_order="summation desc">
+                    <field name="display_name" string="Name"/>
+                    <field name="function" invisible="1"/>
+                    <field name="mobile"/>
+                    <field name="email"/>
+                    <field name="additional_notes" />
+<!--                    <field name="summation"/>-->
+                    <field name="user_id" invisible="1"/>
+                    <field name="is_company" invisible="1"/>
+                    <field name="country_id" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                </tree>
+              </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
